@@ -66,5 +66,23 @@ export const UFS = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 
 export const DIAS_AVISO_REGISTRO = 30
 export const DIAS_AVISO_MANUTENCAO = 7
 
+export const CONVENIOS = [
+  'SUS',
+  'Unimed',
+  'Bradesco Saúde',
+  'SulAmérica',
+  'Amil',
+  'Porto Seguro',
+  'Particular',
+  'Outro',
+]
+
+export const OPCOES_SEXO = [
+  { valor: 'F', rotulo: 'Feminino' },
+  { valor: 'M', rotulo: 'Masculino' },
+  { valor: 'O', rotulo: 'Outro' },
+]
+
 /** Converte um mapa { chave: rótulo } em opções do <Select>. */
 export const opcoes = (mapa) => Object.entries(mapa).map(([valor, rotulo]) => ({ valor, rotulo }))
+

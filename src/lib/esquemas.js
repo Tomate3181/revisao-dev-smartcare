@@ -64,3 +64,58 @@ export const esquemaProfissional = z.object({
   consultorio_id: vazioParaNull(z.uuid()),
   ativo: z.boolean(),
 })
+
+// ---------- RF04: Recepção de Pacientes ----------
+
+/** Validação algorítmica de CPF brasileiro (11 dígitos e dígitos verificadores) */
+export function validarCpf(cpf) {
+  if (!cpf) return false
+  const limpo = String(cpf).replace(/\D/g, '')
+  if (limpo.length !== 11) return false
+  if (/^(\d)\1+$/.test(limpo)) return false
+  const digitos = limpo.split('').map(Number)
+  const dv = (base) => {
+    const soma = base.reduce((s, d, i) => s + d * (base.length + 1 - i), 0)
+    const r = (soma * 10) % 11
+    return r === 10 ? 0 : r
+  }
+  return digitos[9] === dv(digitos.slice(0, 9)) && digitos[10] === dv(digitos.slice(0, 10))
+}
+
+export const esquemaRecepcao = z.object({
+  // Identificação do Paciente
+  nome: texto(3, 120, 'Informe o nome completo do paciente'),
+  cpf: z
+    .string()
+    .trim()
+    .transform((v) => v.replace(/\D/g, ''))
+    .refine((v) => v.length === 11, 'CPF deve ter 11 dígitos')
+    .refine(validarCpf, 'CPF inválido (dígitos verificadores não conferem)'),
+  data_nascimento: data.refine(
+    (d) => {
+      const hoje = new Date().toISOString().slice(0, 10)
+      return d <= hoje
+    },
+    'A data de nascimento não pode ser no futuro',
+  ),
+  sexo: z.enum(['F', 'M', 'O'], { error: 'Selecione o sexo' }),
+  telefone: vazioParaNull(z.string().trim().regex(/^[0-9()\s+-]{8,20}$/, 'Telefone inválido')),
+  convenio: texto(2, 60, 'Informe o convênio'),
+  numero_carteirinha: vazioParaNull(z.string().trim().max(40)),
+  alergias: z.array(z.string()).default([]),
+  comorbidades: z.array(z.string()).default([]),
+
+  // Atendimento
+  queixa_principal: texto(3, 500, 'Informe a queixa principal (mínimo 3 caracteres)'),
+
+  // Sinais vitais iniciais (opcionais na recepção)
+  pa_sistolica: vazioParaNull(z.number().int().min(40, 'Mínimo 40').max(300, 'Máximo 300')),
+  pa_diastolica: vazioParaNull(z.number().int().min(20, 'Mínimo 20').max(200, 'Máximo 200')),
+  temperatura: vazioParaNull(z.number().min(30, 'Mínimo 30°C').max(45, 'Máximo 45°C')),
+  frequencia_cardiaca: vazioParaNull(z.number().int().min(20, 'Mínimo 20 bpm').max(250, 'Máximo 250 bpm')),
+  frequencia_respiratoria: vazioParaNull(z.number().int().min(4, 'Mínimo 4 rpm').max(70, 'Máximo 70 rpm')),
+  saturacao: vazioParaNull(z.number().int().min(40, 'Mínimo 40%').max(100, 'Máximo 100%')),
+  dor: vazioParaNull(z.number().int().min(0, 'Mínimo 0').max(10, 'Máximo 10')),
+  glicemia: vazioParaNull(z.number().int().min(10, 'Mínimo 10 mg/dL').max(1000, 'Máximo 1000 mg/dL')),
+})
+
