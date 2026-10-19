@@ -131,6 +131,14 @@ async function criarUsuarios() {
     })
     if (error) throw new Error(`usuário ${u.email}: ${error.message}`)
     ids[u.perfil] = data.user.id
+
+    // Garante perfil/registro/ativo no profile mesmo que o trigger tenha rodado antes de o
+    // Auth gravar o app_metadata (comportamento do Supabase no createUser).
+    const { error: e } = await db
+      .from('profiles')
+      .update({ nome: u.nome, perfil: u.perfil, registro: u.registro ?? null, ativo: true })
+      .eq('id', data.user.id)
+    if (e) throw new Error(`profile ${u.email}: ${e.message}`)
   }
   fim()
   return ids

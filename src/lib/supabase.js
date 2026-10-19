@@ -11,7 +11,7 @@ if (!supabaseConfigurado) {
   console.warn('[Smart Care] VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY ausentes. Copie .env.example para .env.')
 }
 
-export const supabase = createClient(url ?? 'http://localhost', anonKey ?? 'chave-ausente', {
+export const supabase = createClient(url || 'http://localhost', anonKey || 'chave-ausente', {
   auth: { persistSession: true, autoRefreshToken: true },
   realtime: { params: { eventsPerSecond: 10 } },
 })

@@ -3,10 +3,11 @@ import { Campo } from './Campo'
 import { estiloCampo } from './estilos'
 
 // Compatível com react-hook-form: <Input label="Nome" {...register('nome')} erro={errors.nome?.message} />
-export function Input({ label, erro, dica, obrigatorio, className, ref, ...props }) {
+// className vai no bloco (rótulo + campo); classeCampo vai no <input>.
+export function Input({ label, erro, dica, obrigatorio, className, classeCampo, ref, ...props }) {
   return (
     <Campo label={label} erro={erro} dica={dica} obrigatorio={obrigatorio} className={className}>
-      {(a11y) => <input ref={ref} className={cn(estiloCampo, 'h-10')} {...a11y} {...props} />}
+      {(a11y) => <input ref={ref} className={cn(estiloCampo, 'h-10', classeCampo)} {...a11y} {...props} />}
     </Campo>
   )
 }

@@ -46,6 +46,43 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
+-- O Auth do Supabase (admin.createUser / updateUserById) grava o app_metadata DEPOIS do insert.
+-- Por isso sincronizamos perfil e registro também quando esse campo muda. Continua seguro:
+-- app_metadata só é gravável com a service_role.
+create or replace function public.sync_app_metadata_perfil()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_perfil public.perfil;
+begin
+  begin
+    v_perfil := (new.raw_app_meta_data ->> 'perfil')::public.perfil;
+  exception when invalid_text_representation then
+    return new;
+  end;
+  if v_perfil is null then
+    return new;
+  end if;
+
+  update public.profiles
+     set perfil   = v_perfil,
+         registro = coalesce(nullif(trim(new.raw_app_meta_data ->> 'registro'), ''), registro),
+         ativo    = true
+   where id = new.id;
+  return new;
+end;
+$$;
+
+drop trigger if exists on_auth_user_app_metadata on auth.users;
+create trigger on_auth_user_app_metadata
+  after update of raw_app_meta_data on auth.users
+  for each row
+  when (new.raw_app_meta_data is distinct from old.raw_app_meta_data)
+  execute function public.sync_app_metadata_perfil();
+
 
 -- =====================================================================================
 -- 2. LOGIN POR REGISTRO PROFISSIONAL (RF01: "e-mail ou registro profissional")
