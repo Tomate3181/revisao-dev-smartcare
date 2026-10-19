@@ -1,0 +1,81 @@
+@import 'tailwindcss';
+@import './styles/tokens.css';
+
+/* "dark:" do Tailwind segue o atributo data-tema, não o sistema (o usuário escolhe). */
+@custom-variant dark (&:where([data-tema='escuro'], [data-tema='escuro'] *));
+
+/* Expõe os tokens como utilitários: bg-superficie, text-texto-suave, border-borda, bg-manchester-vermelho... */
+@theme inline {
+  --color-fundo: var(--fundo);
+  --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
+  --color-borda: var(--borda);
+  --color-borda-forte: var(--borda-forte);
+  --color-texto: var(--texto);
+  --color-texto-suave: var(--texto-suave);
+  --color-texto-inverso: var(--texto-inverso);
+
+  --color-marca: var(--marca);
+  --color-marca-forte: var(--marca-forte);
+  --color-marca-suave: var(--marca-suave);
+  --color-marca-texto: var(--marca-texto);
+  --color-foco: var(--foco);
+
+  --color-perigo: var(--perigo);
+  --color-perigo-suave: var(--perigo-suave);
+  --color-aviso-suave: var(--aviso-suave);
+  --color-aviso-texto: var(--aviso-texto);
+  --color-ok-suave: var(--ok-suave);
+  --color-ok-texto: var(--ok-texto);
+
+  --color-manchester-vermelho: var(--manchester-vermelho);
+  --color-manchester-vermelho-texto: var(--manchester-vermelho-texto);
+  --color-manchester-laranja: var(--manchester-laranja);
+  --color-manchester-laranja-texto: var(--manchester-laranja-texto);
+  --color-manchester-amarelo: var(--manchester-amarelo);
+  --color-manchester-amarelo-texto: var(--manchester-amarelo-texto);
+  --color-manchester-verde: var(--manchester-verde);
+  --color-manchester-verde-texto: var(--manchester-verde-texto);
+  --color-manchester-azul: var(--manchester-azul);
+  --color-manchester-azul-texto: var(--manchester-azul-texto);
+
+  --font-sans: var(--fonte-sans);
+  --font-mono: var(--fonte-mono);
+  --radius-ui: var(--raio);
+  --shadow-ui: var(--sombra);
+}
+
+@layer base {
+  html {
+    font-family: var(--fonte-sans);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--fundo);
+    color: var(--texto);
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Foco sempre visível na navegação por teclado (RNF03). */
+  :focus-visible {
+    outline: 2px solid var(--foco);
+    outline-offset: 2px;
+  }
+
+  /* Números (sinais vitais, cronômetros, KPIs) alinhados em colunas. */
+  .num {
+    font-family: var(--fonte-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

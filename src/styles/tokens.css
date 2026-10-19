@@ -1,0 +1,87 @@
+/*
+ * Design tokens do Smart Care.
+ *
+ * Regra de ouro: as cores de Manchester (--manchester-*) são EXCLUSIVAS da classificação de risco.
+ * Nenhum botão, gráfico genérico ou elemento de marca usa vermelho/laranja/amarelo/verde/azul de
+ * Manchester, para que a cor sempre signifique "prioridade" para quem está no plantão.
+ * A marca é neutra (grafite + violeta) justamente para não competir com elas.
+ *
+ * Cada cor de Manchester tem um par "-texto" com contraste AA (>= 4.5:1) sobre ela.
+ */
+
+:root {
+  /* Superfícies e texto */
+  --fundo: #f5f6f8;
+  --superficie: #ffffff;
+  --superficie-2: #eef0f3;
+  --borda: #d9dde3;
+  --borda-forte: #b8bfc9;
+  --texto: #151a21;
+  --texto-suave: #545d6b;
+  --texto-inverso: #ffffff;
+
+  /* Marca (violeta, fora da paleta de Manchester) */
+  --marca: #5b3fd1;
+  --marca-forte: #4a2fb8;
+  --marca-suave: #ece8fb;
+  --marca-texto: #ffffff;
+  --foco: #5b3fd1;
+
+  /* Estados de interface (não confundir com prioridade clínica) */
+  --perigo: #9f1239;
+  --perigo-suave: #fbe7ee;
+  --aviso-suave: #fdf3dc;
+  --aviso-texto: #6b4a00;
+  --ok-suave: #e3f3ea;
+  --ok-texto: #155a33;
+
+  /* Manchester — uso exclusivo da classificação de risco */
+  --manchester-vermelho: #c8102e;
+  --manchester-vermelho-texto: #ffffff;
+  --manchester-laranja: #ef7d1a;
+  --manchester-laranja-texto: #1a1206;
+  --manchester-amarelo: #f4c20d;
+  --manchester-amarelo-texto: #1a1500;
+  --manchester-verde: #1f7a3d;
+  --manchester-verde-texto: #ffffff;
+  --manchester-azul: #1f5fc4;
+  --manchester-azul-texto: #ffffff;
+
+  /* Tipografia e forma */
+  --fonte-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fonte-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
+  --raio: 0.5rem;
+  --sombra: 0 1px 2px rgb(16 24 40 / 0.06), 0 1px 3px rgb(16 24 40 / 0.08);
+
+  color-scheme: light;
+}
+
+/* Modo escuro: usado também no "modo TV" do mapa de ocupação. */
+:root[data-tema='escuro'] {
+  --fundo: #0e1116;
+  --superficie: #161a21;
+  --superficie-2: #1e232c;
+  --borda: #2b313c;
+  --borda-forte: #3d4553;
+  --texto: #e8ebf0;
+  --texto-suave: #9aa3b2;
+  --texto-inverso: #0e1116;
+
+  --marca: #8b74f0;
+  --marca-forte: #a08cf5;
+  --marca-suave: #262041;
+  --marca-texto: #0e1116;
+  --foco: #a08cf5;
+
+  --perigo: #f27a9b;
+  --perigo-suave: #3a1622;
+  --aviso-suave: #3a2e10;
+  --aviso-texto: #f5d78a;
+  --ok-suave: #12301f;
+  --ok-texto: #8fdcae;
+
+  /* No escuro as cores de Manchester ficam iguais: o significado não pode mudar com o tema. */
+
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 1px 3px rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
