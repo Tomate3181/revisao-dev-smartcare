@@ -1,0 +1,14 @@
+nome,cpf,data_nascimento,sexo,telefone,convenio,numero_carteirinha,queixa_principal,pa_sistolica,pa_diastolica,temperatura,frequencia_cardiaca,frequencia_respiratoria,saturacao,dor,alergias,comorbidades
+Carlos Eduardo Lima,52998224725,1958-03-14,M,(12) 99812-4410,SUS,,Dor no peito em aperto,168,98,36.8,108,20,95,8,AAS,Hipertensão;Diabetes tipo 2
+Mariana Souza Alves,11144477735,1992-07-02,F,(12) 98123-7788,Unimed,482913377,Febre e tosse há 3 dias,118,76,38.9,102,22,94,3,,Asma
+Heitor Gomes Rocha,39053344705,2019-11-20,M,(12) 99701-2234,SUS,,Febre alta e prostração,95,60,40.1,148,32,93,5,Dipirona,
+Lúcia Ferreira Dias,86288366757,1949-01-30,F,(12) 98877-1102,Bradesco Saúde,771234598,Falta de ar e chiado no peito,142,88,37.0,116,28,90,4,,DPOC;Insuficiência cardíaca
+Rafael Martins Nunes,71428793860,1988-05-17,M,(12) 99234-5566,SulAmérica,334455667,Entorse no tornozelo com deformidade,126,80,36.5,88,16,98,6,,
+Beatriz Andrade Lopes,15350946056,2001-09-09,F,(12) 98456-9012,SUS,,Dor de garganta,115,72,37.8,84,16,98,3,Penicilina,
+Antônio Carvalho Pereira,92351101812,1975-12-01,M,(12) 99567-3344,Amil,998877665,Dor de cabeça forte e pressão alta,192,116,36.6,92,18,97,6,,Hipertensão;Obesidade
+Sofia Marques Ribeiro,68135274793,2015-04-22,F,(12) 98345-6677,Unimed,112233445,Vômitos persistentes,100,64,37.9,124,24,97,4,,
+Paulo Henrique Vieira,44908348618,1966-08-11,M,(12) 99988-1234,SUS,,Renovação de receita de uso contínuo,132,84,36.4,72,14,98,0,,Diabetes tipo 2
+,19782311561,1990-02-10,F,(12) 98111-2222,SUS,,Tosse e coriza,120,80,36.9,80,16,98,1,,
+João Pedro Barbosa,12345678900,1985-06-30,M,(12) 99333-4444,SUS,,Dor lombar após esforço,124,82,36.7,78,16,98,4,,
+Fernanda Castro Moreira,93541134780,1979-10-05,F,(12) 98555-6666,SUS,,Falta de ar intensa,138,86,37.1,124,30,150,7,,Asma
+Gabriel Nascimento Melo,85565484405,2030-01-01,M,(12) 99777-8888,Unimed,556677889,Diarreia sem sinais de desidratação,118,74,37.2,90,16,98,2,,
